@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="index.js" async type="module"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="title">WASM vs JS</h1>
+    <section class="section">
+        <h2 class="section-title">Default cycle</h2>
+        <div class="input-block">
+            <input class="input" id="cycle-input">
+            <button id="cycle-enter-btn" class="enter-btn">Start!</button>
+        </div>
+        <div class="cycle-iteration__result-block result-block">
+            <div>
+                <p>WASM result: <span id="cycle-wasm-result"></span></p>
+            </div>
+            <div>
+                <p>JS result: <span id="cycle-js-result"></span></p>
+            </div>
+            <div>
+                <p>Description: <span id="cycle-description"></span></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Iterate array into cycle</h2>
+        <div class="input-block">
+            <input class="input" id="array-input">
+            <button id="array-enter-btn" class="enter-btn">Start!</button>
+        </div>
+        <div class="result-block">
+            <div>
+                <p>WASM result: <span id="array-wasm-result"></span></p>
+            </div>
+            <div>
+                <p>JS result: <span id="array-js-result"></span></p>
+            </div>
+            <div>
+                <p>Description: <span id="array-description"></span></p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Fibonacci number</h2>
+        <div class="input-block">
+            <input class="input" id="fib-input">
+            <button id="fib-enter-btn" class="enter-btn">Start!</button>
+        </div>
+        <div class="result-block">
+            <div>
+                <p>WASM result: <span id="fib-wasm-result"></span></p>
+            </div>
+            <div>
+                <p>JS result: <span id="fib-js-result"></span></p>
+            </div>
+            <div>
+                <p>Description: <span id="fib-description"></span></p>
+            </div>
+        </div>
+    </section>
+
+</div>
+</body>
+</html>
