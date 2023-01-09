@@ -1,7 +1,8 @@
+extern crate wasm_bindgen;
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
-pub fn wasmCycle(arg: usize) -> String {
+pub fn wasmLoop(arg: usize) -> String {
     let mut b: usize = 0;
     for num in 0..arg {
         b = b + 2;
@@ -11,7 +12,7 @@ pub fn wasmCycle(arg: usize) -> String {
 }
 
 #[wasm_bindgen]
-pub fn wasmIterate(arg: usize) -> Vec<i64> {
+pub fn wasmArrayLoop(arg: usize) -> Vec<i64> {
     let mut array: [i64; 10000] = [0; 10000];
     for num in 0..arg {
         for i in 0..array.len() {

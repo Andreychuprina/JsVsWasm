@@ -1,17 +1,16 @@
-import init, {wasmCycle, wasmFib, wasmIterate} from "../pkg/hello_wasm.js";
+import init, {wasmLoop, wasmFib, wasmArrayLoop} from "../pkg/hello_wasm.js";
 
-const cycleWasmTextEl = document.getElementById('cycle-wasm-result');
-const cycleJsTextEl = document.getElementById('cycle-js-result');
-const cycleEnterBtnEl = document.getElementById('cycle-enter-btn');
-const cycleInputEl = document.getElementById('cycle-input');
-const cycleDescriptionEl = document.getElementById('cycle-description');
+const loopWasmTextEl = document.getElementById('loop-wasm-result');
+const loopJsTextEl = document.getElementById('loop-js-result');
+const loopEnterBtnEl = document.getElementById('loop-enter-btn');
+const loopInputEl = document.getElementById('loop-input');
+const loopDescriptionEl = document.getElementById('loop-description');
 
 const fibWasmTextEl = document.getElementById('fib-wasm-result');
 const fibJsTextEl = document.getElementById('fib-js-result');
 const fibEnterBtnEl = document.getElementById('fib-enter-btn');
 const fibInputEl = document.getElementById('fib-input');
 const fibDescriptionEl = document.getElementById('fib-description');
-
 
 const arrayWasmTextEl = document.getElementById('array-wasm-result');
 const arrayJsTextEl = document.getElementById('array-js-result');
@@ -26,26 +25,26 @@ const maxFibValue = 44;
 const arrayLength = 10000;
 const defaultArrayValue = 0;
 
-//
-cycleEnterBtnEl.addEventListener('click', () => {
-    const strIterationCount = cycleInputEl.value;
+//DEFAULT LOOP START
+loopEnterBtnEl.addEventListener('click', () => {
+    const strIterationCount = loopInputEl.value;
     const iterationCount = +strIterationCount;
 
     if (!isStart(iterationCount, maxIterationCount)) return;
 
-    cycleInputEl.value = '';
+    loopInputEl.value = '';
 
-    const jsResult = calcTime(jsDefaultCycle, iterationCount);
-    const wasmResult = calcTime(wasmDefaultCycle, iterationCount);
+    const jsResult = calcTime(jsDefaultLoop, iterationCount);
+    const wasmResult = calcTime(wasmDefaultLoop, iterationCount);
 
-    setInfo(cycleJsTextEl, jsResult, cycleWasmTextEl, wasmResult, cycleDescriptionEl);
+    setInfo(loopJsTextEl, jsResult, loopWasmTextEl, wasmResult, loopDescriptionEl);
 });
 
-function wasmDefaultCycle(iterationCount) {
-    return wasmCycle(iterationCount);
+function wasmDefaultLoop(iterationCount) {
+    return wasmLoop(iterationCount);
 }
 
-function jsDefaultCycle(iterationCount) {
+function jsDefaultLoop(iterationCount) {
     let result = 0;
 
     for (let i = 0; i < iterationCount; i++) {
@@ -54,10 +53,10 @@ function jsDefaultCycle(iterationCount) {
 
     return result;
 }
-//
+//DEFAULT LOOP END
 
 
-//
+//ARRAY LOOP START
 arrayEnterBtnEl.addEventListener('click', () => {
     const strIterationCount = arrayInputEl.value;
     const iterationCount = +strIterationCount;
@@ -65,29 +64,29 @@ arrayEnterBtnEl.addEventListener('click', () => {
     if (!isStart(iterationCount,maxArrayIterationCount)) return;
 
     arrayInputEl.value = '';
-    const jsResult = calcTime(iterateJsArray, iterationCount);
-    const wasmResult = calcTime(iterateWasmArray, iterationCount);
+    const jsResult = calcTime(loopJsArray, iterationCount);
+    const wasmResult = calcTime(loopWasmArray, iterationCount);
 
     setInfo(arrayJsTextEl, jsResult, arrayWasmTextEl, wasmResult, arrayDescriptionEl);
 });
 
 
-function iterateWasmArray(iterationCount) {
-    return wasmIterate(iterationCount);
+function loopWasmArray(iterationCount) {
+    return wasmArrayLoop(iterationCount);
 }
 
-function iterateJsArray(iterationCount) {
+function loopJsArray(iterationCount) {
     const array = new Array(arrayLength).fill(defaultArrayValue);
 
     for (let i = 0; i < iterationCount; i++) {
-        array.forEach((value, index) => {
-            array[index] = array[index] + 2;
-        });
+        for (let i = 0; i < array.length; i++) {
+            array[i] = array[i] + 1;
+        }
     }
 
     return array;
 }
-//
+//ARRAY LOOP END
 
 
 // FIBONACCI START
@@ -103,8 +102,6 @@ fibEnterBtnEl.addEventListener('click', () => {
     const wasmResult = calcTime(calcWasmFib, n);
 
     setInfo(fibJsTextEl, jsResult, fibWasmTextEl, wasmResult, fibDescriptionEl);
-    fibWasmTextEl.innerText = calcTime(calcWasmFib, n);
-    fibJsTextEl.innerText = calcTime(calcJsFib, n);
 });
 
 function calcWasmFib(n) {
